@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Do NOT rewrite requests to the /api/ folder (allow PHP execution directly)
+  RewriteRule ^api/ - [L]
+
+  # 2. Serve existing files or directories directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 3. Rewrite all other routes to index.html for React SPA Router
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Enable Gzip compression for faster loading
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>

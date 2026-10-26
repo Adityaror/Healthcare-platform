@@ -1,0 +1,423 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-cinzel: 'Cinzel', serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-scale: 100%;
+    --accent-primary: #b5936d;
+    --accent-gold: #c5932b;
+    --accent-secondary: #dfba79;
+    --accent-light: #fbf8f2;
+    --accent-surface: #fdfbf7;
+    --accent-border: #eedfcb;
+    --accent-dark: #1f1b16;
+
+    /* Dynamic Section Linear Gradient (Default: Antique Silk Gold & Cashmere at 45deg) */
+    --section-bg-gradient: linear-gradient(45deg, #e1d3b7 0%, #897d67 100%);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: var(--font-scale);
+    font-family: var(--font-sans);
+    color: #1f242e;
+    background: var(--section-bg-gradient);
+    background-attachment: fixed;
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--section-bg-gradient);
+    background-attachment: fixed;
+    color: #1f242e;
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+  }
+
+  #root {
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel), 'Cinzel', serif !important;
+}
+
+.font-serif {
+  font-family: var(--font-serif), 'Playfair Display', Georgia, serif !important;
+}
+
+.font-sans {
+  font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* ==========================================================================
+   QUIET LUXURY ANIMATION SYSTEM
+   ========================================================================== */
+
+/* 1. Subtle Ken Burns & Ambient Drift */
+@keyframes subtleKenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.04) translate(-0.6%, -0.3%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.animate-subtle-kenburns {
+  animation: subtleKenBurns 7s ease-in-out infinite alternate;
+}
+
+/* 2. Text & Content Masked Reveal Animations */
+@keyframes revealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-reveal-up {
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes maskSlideRight {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-mask-reveal {
+  animation: maskSlideRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Gold Shimmer Sheen on Hover */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.hover-gold-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(223, 186, 121, 0.25), transparent);
+  background-size: 200% 100%;
+}
+
+.hover-gold-shimmer:hover {
+  animation: goldShimmer 1.4s ease-in-out infinite;
+}
+
+/* 4. Luxury Card Elevation & Micro-interactions */
+.luxury-card-hover {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.luxury-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -10px rgba(181, 147, 109, 0.2), 0 0 0 1px rgba(197, 147, 43, 0.3);
+  border-color: #c5932b !important;
+}
+
+/* 5. Smooth Button Sheen & Spring Scale */
+.btn-luxury-interact {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-luxury-interact::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-luxury-interact:hover::after {
+  left: 100%;
+}
+
+.btn-luxury-interact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(31, 27, 22, 0.25);
+}
+
+/* 6. Staggered Delays for Entrance */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* 7. Image Reveal Frame */
+.image-reveal-container {
+  overflow: hidden;
+}
+
+.image-reveal-container img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.image-reveal-container:hover img {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   DYNAMIC THEME & GRADIENT OVERRIDES
+   ========================================================================== */
+
+/* Text Colors */
+.ui-theme-scope .gold-text,
+.ui-theme-scope .text-\[\#c5932b\],
+.ui-theme-scope .text-\[\#b5936d\],
+.ui-theme-scope .text-\[\#c9a25a\],
+.ui-theme-scope .text-\[\#d4af37\],
+.ui-theme-scope .text-\[\#b8924e\],
+.ui-theme-scope .text-\[\#a8791c\],
+.ui-theme-scope .text-\[\#b0801f\],
+.ui-theme-scope .text-\[\#b8860b\],
+.ui-theme-scope .text-\[\#c8a265\] {
+  color: var(--accent-gold) !important;
+}
+
+.ui-theme-scope .text-\[\#dfba79\],
+.ui-theme-scope .text-\[\#e8cb6b\] {
+  color: var(--accent-secondary) !important;
+}
+
+/* High Contrast Deep Charcoal for Body Text on Light Gold/Cashmere Backdrops */
+.ui-theme-scope section:not(.bg-\[\#1f1b16\]) .text-\[\#5c544b\],
+.ui-theme-scope section:not(.bg-\[\#1f1b16\]) p.font-light,
+.ui-theme-scope section:not(.bg-\[\#1f1b16\]) .text-gray-600,
+.ui-theme-scope section:not(.bg-\[\#1f1b16\]) .text-gray-500 {
+  color: #1a1612 !important;
+  font-weight: 400 !important;
+}
+
+.ui-theme-scope section:not(.bg-\[\#1f1b16\]) strong {
+  color: #0c0a08 !important;
+  font-weight: 700 !important;
+}
+
+/* Explicit High Contrast & Crisp Luminous Colors for Footer */
+.ui-theme-scope footer,
+.ui-theme-scope footer p,
+.ui-theme-scope footer span,
+.ui-theme-scope footer li,
+.ui-theme-scope footer div {
+  color: #ede6db !important;
+}
+
+.ui-theme-scope footer strong,
+.ui-theme-scope footer .text-\[\#d4af6a\],
+.ui-theme-scope footer .text-\[\#dfba79\] {
+  color: #dfba79 !important;
+}
+
+.ui-theme-scope footer a {
+  color: #f5efe3 !important;
+}
+
+.ui-theme-scope footer a:hover {
+  color: #dfba79 !important;
+}
+
+.ui-theme-scope footer h2,
+.ui-theme-scope footer h3 {
+  color: #ffffff !important;
+}
+
+/* Hover States & Group Hovers */
+.ui-theme-scope .hover\:text-\[\#c5932b\]:hover,
+.ui-theme-scope .hover\:text-\[\#b5936d\]:hover,
+.ui-theme-scope .hover\:text-\[\#c9a25a\]:hover,
+.ui-theme-scope .hover\:text-\[\#b8924e\]:hover,
+.ui-theme-scope .hover\:text-\[\#d4af37\]:hover,
+.ui-theme-scope .hover\:text-\[\#a8791c\]:hover {
+  color: var(--accent-gold) !important;
+}
+
+.ui-theme-scope .group:hover .group-hover\:text-\[\#c5932b\],
+.ui-theme-scope .group:hover .group-hover\:text-\[\#b5936d\],
+.ui-theme-scope .group:hover .group-hover\:text-\[\#c9a25a\],
+.ui-theme-scope .group:hover .group-hover\:text-\[\#b8924e\] {
+  color: var(--accent-gold) !important;
+}
+
+/* Background Colors */
+.ui-theme-scope .gold-bg,
+.ui-theme-scope .bg-\[\#c5932b\],
+.ui-theme-scope .bg-\[\#b5936d\],
+.ui-theme-scope .bg-\[\#c9a25a\],
+.ui-theme-scope .bg-\[\#c8a265\] {
+  background-color: var(--accent-gold) !important;
+}
+
+.ui-theme-scope .hover\:bg-\[\#c5932b\]:hover,
+.ui-theme-scope .hover\:bg-\[\#b5936d\]:hover,
+.ui-theme-scope .hover\:bg-\[\#c9a25a\]:hover,
+.ui-theme-scope .hover\:bg-\[\#b0801f\]:hover,
+.ui-theme-scope .hover\:bg-\[\#a8791c\]:hover {
+  background-color: var(--accent-primary) !important;
+}
+
+.ui-theme-scope .group:hover .group-hover\:bg-\[\#c9a25a\],
+.ui-theme-scope .group:hover .group-hover\:bg-\[\#c5932b\] {
+  background-color: var(--accent-gold) !important;
+}
+
+/* Light Background Tints & Badges */
+.ui-theme-scope .light-gold-bg,
+.ui-theme-scope .bg-\[\#fcf8f0\],
+.ui-theme-scope .bg-\[\#fbf8f2\],
+.ui-theme-scope .bg-\[\#faf6ee\],
+.ui-theme-scope .bg-\[\#f5ecdc\],
+.ui-theme-scope .bg-\[\#f5efe3\],
+.ui-theme-scope .bg-\[\#fdfbf7\] {
+  background-color: var(--accent-light) !important;
+}
+
+/* Borders */
+.ui-theme-scope .border-\[\#c5932b\],
+.ui-theme-scope .border-\[\#b5936d\],
+.ui-theme-scope .border-\[\#c9a25a\],
+.ui-theme-scope .border-\[\#b8924e\],
+.ui-theme-scope .border-\[\#d4af37\] {
+  border-color: var(--accent-gold) !important;
+}
+
+.ui-theme-scope .border-\[\#eedfcb\],
+.ui-theme-scope .border-\[\#ebdcc4\],
+.ui-theme-scope .border-\[\#e5d5be\] {
+  border-color: var(--accent-border) !important;
+}
+
+.ui-theme-scope .hover\:border-\[\#c5932b\]:hover,
+.ui-theme-scope .hover\:border-\[\#b5936d\]:hover,
+.ui-theme-scope .hover\:border-\[\#c9a25a\]:hover,
+.ui-theme-scope .hover\:border-\[\#b8924e\]:hover {
+  border-color: var(--accent-gold) !important;
+}
+
+/* Section Linear Gradients (Only applied to standard light sections) */
+.ui-theme-scope .section-linear-gradient,
+.ui-theme-scope .theme-section-bg,
+.ui-theme-scope main > section:not(.dark-section):not(.bg-white):not([data-dark="true"]),
+.ui-theme-scope section.theme-section-bg,
+.ui-theme-scope footer.theme-section-bg {
+  background: var(--section-bg-gradient);
+}
+
+/* Dark Luxury Sections & CTA Banners */
+.ui-theme-scope .dark-section,
+.ui-theme-scope section.dark-section,
+.ui-theme-scope [data-dark="true"] {
+  background: linear-gradient(135deg, #161310 0%, #262019 50%, #161310 100%) !important;
+  color: #ffffff !important;
+}
+
+.ui-theme-scope .dark-section h1,
+.ui-theme-scope .dark-section h2,
+.ui-theme-scope .dark-section h3 {
+  color: #ffffff !important;
+}
+
+.ui-theme-scope .dark-section p,
+.ui-theme-scope .dark-section span.text-desc {
+  color: #ede6db !important;
+  font-weight: 400 !important;
+}
+
+.ui-theme-scope .dark-section .text-gold-accent,
+.ui-theme-scope .dark-section .text-\[\#dfba79\] {
+  color: #dfba79 !important;
+}
+
+.ui-theme-scope .gold-bg-gradient,
+.ui-theme-scope .bg-gradient-to-r.from-\[\#c8a265\] {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-secondary) 50%, var(--accent-primary) 100%) !important;
+}
+
+.ui-theme-scope .gold-text-gradient {
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-gold) 50%, var(--accent-secondary) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.ui-theme-scope .champagne-card {
+  background: #ffffff;
+  border: 1px solid var(--accent-border);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.ui-theme-scope .dark-luxury-card {
+  background: #11141c !important;
+  color: #ffffff !important;
+  border: 1px solid var(--accent-gold);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--accent-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Infinite Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
